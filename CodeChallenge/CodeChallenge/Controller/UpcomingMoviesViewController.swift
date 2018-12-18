@@ -92,7 +92,7 @@ extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSour
         guard let movies = moviesToShow(), let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies") as? UpcomingMoviesTableViewCell else { return UITableViewCell() }
         let movie = movies[indexPath.row]
         let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
-        cell.configureCellFor(movie: movie, genres: genres)
+        cell.configureCellFor(movieName: movie.title, movieReleaseDate: movie.releaseDate, moviePosterURL: movie.releaseDate, genres: genres)
         return cell
     }
     

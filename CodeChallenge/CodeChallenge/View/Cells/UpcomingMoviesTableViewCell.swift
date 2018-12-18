@@ -34,16 +34,16 @@ class UpcomingMoviesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureCellFor(movie: Movie, genres: String) {
-        nameLabel.text = movie.title
+    func configureCellFor(movieName: String, movieReleaseDate: String, moviePosterURL: String, genres: String) {
+        nameLabel.text = movieName
         genreLabel.text = genres
-        releaseDateLabel.text = movie.releaseDate
-        updateImage(movie: movie)
+        releaseDateLabel.text = movieReleaseDate
+        updateImage(posterURL: moviePosterURL, movieName: movieName)
     }
     
-    func updateImage(movie: Movie) {
-        guard let posterURL = movie.posterURL, let url = URL(string: "\(MovieService.imageURL)\(posterURL)") else { return }
-        let resource = ImageResource(downloadURL: url, cacheKey: movie.title )
+    func updateImage(posterURL: String, movieName: String) {
+        guard let url = URL(string: "\(MovieService.imageURL)\(posterURL)") else { return }
+        let resource = ImageResource(downloadURL: url, cacheKey: movieName )
         let placeholder = UIImage(named: "placeholder")
         movieImageView.kf.setImage(with: resource, placeholder: placeholder, options: [.transition(.fade(0.3))])
         self.setNeedsLayout()
