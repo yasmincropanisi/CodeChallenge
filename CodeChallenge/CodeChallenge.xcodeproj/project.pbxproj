@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E4002CF21C869FA0075E9DB /* UpcomingMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4002CE21C869FA0075E9DB /* UpcomingMoviesTableViewCell.swift */; };
+		7E4002D121C8715B0075E9DB /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4002D021C8715B0075E9DB /* Genre.swift */; };
+		7E7D4A6821C89034004D95C4 /* MovieDetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D4A6721C89034004D95C4 /* MovieDetailStoryboard.storyboard */; };
+		7E7D4A6A21C8913B004D95C4 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D4A6921C8913B004D95C4 /* MovieDetailViewController.swift */; };
 		7E953E1721C6D717007BC27A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E1621C6D717007BC27A /* AppDelegate.swift */; };
-		7E953E1921C6D717007BC27A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E1821C6D717007BC27A /* ViewController.swift */; };
+		7E953E1921C6D717007BC27A /* UpcomingMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E1821C6D717007BC27A /* UpcomingMoviesViewController.swift */; };
 		7E953E1C21C6D717007BC27A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E953E1A21C6D717007BC27A /* Main.storyboard */; };
 		7E953E1E21C6D718007BC27A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E953E1D21C6D718007BC27A /* Assets.xcassets */; };
 		7E953E2121C6D718007BC27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E953E1F21C6D718007BC27A /* LaunchScreen.storyboard */; };
@@ -17,15 +21,21 @@
 		7E953E3321C6D7D0007BC27A /* Request+HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E2F21C6D7D0007BC27A /* Request+HttpRequest.swift */; };
 		7E953E3421C6D7D0007BC27A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E3021C6D7D0007BC27A /* Request.swift */; };
 		7E953E3621C6D7E1007BC27A /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E3521C6D7E1007BC27A /* ServiceRequest.swift */; };
+		7E953E3821C6DA18007BC27A /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E3721C6DA18007BC27A /* MovieService.swift */; };
+		7E953E3A21C6DAA2007BC27A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E953E3921C6DAA2007BC27A /* Movie.swift */; };
 		F4D81DF7A97D73492D1AA9C3 /* Pods_CodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F2B03751D9B43A115D518E /* Pods_CodeChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		31F3B6A703FDDAF05CCC999A /* Pods-CodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodeChallenge/Pods-CodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		475E6B06EB37BB8AB8641A2D /* Pods-CodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodeChallenge/Pods-CodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		7E4002CE21C869FA0075E9DB /* UpcomingMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMoviesTableViewCell.swift; sourceTree = "<group>"; };
+		7E4002D021C8715B0075E9DB /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		7E7D4A6721C89034004D95C4 /* MovieDetailStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetailStoryboard.storyboard; sourceTree = "<group>"; };
+		7E7D4A6921C8913B004D95C4 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		7E953E1321C6D717007BC27A /* CodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E953E1621C6D717007BC27A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7E953E1821C6D717007BC27A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7E953E1821C6D717007BC27A /* UpcomingMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMoviesViewController.swift; sourceTree = "<group>"; };
 		7E953E1B21C6D717007BC27A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E953E1D21C6D718007BC27A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E953E2021C6D718007BC27A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +45,8 @@
 		7E953E2F21C6D7D0007BC27A /* Request+HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+HttpRequest.swift"; sourceTree = "<group>"; };
 		7E953E3021C6D7D0007BC27A /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		7E953E3521C6D7E1007BC27A /* ServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
+		7E953E3721C6DA18007BC27A /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		7E953E3921C6DAA2007BC27A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A0F2B03751D9B43A115D518E /* Pods_CodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -50,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E4002CB21C868130075E9DB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7E4002CE21C869FA0075E9DB /* UpcomingMoviesTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7E953E0A21C6D717007BC27A = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +106,8 @@
 		7E953E2821C6D790007BC27A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7E953E3921C6DAA2007BC27A /* Movie.swift */,
+				7E4002D021C8715B0075E9DB /* Genre.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,7 +115,9 @@
 		7E953E2921C6D798007BC27A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E4002CB21C868130075E9DB /* Cells */,
 				7E953E1A21C6D717007BC27A /* Main.storyboard */,
+				7E7D4A6721C89034004D95C4 /* MovieDetailStoryboard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -101,7 +125,8 @@
 		7E953E2A21C6D79E007BC27A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7E953E1821C6D717007BC27A /* ViewController.swift */,
+				7E953E1821C6D717007BC27A /* UpcomingMoviesViewController.swift */,
+				7E7D4A6921C8913B004D95C4 /* MovieDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -111,6 +136,7 @@
 			children = (
 				7E953E3521C6D7E1007BC27A /* ServiceRequest.swift */,
 				7E953E2C21C6D7BD007BC27A /* Network */,
+				7E953E3721C6DA18007BC27A /* MovieService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -205,6 +231,7 @@
 			files = (
 				7E953E2121C6D718007BC27A /* LaunchScreen.storyboard in Resources */,
 				7E953E1E21C6D718007BC27A /* Assets.xcassets in Resources */,
+				7E7D4A6821C89034004D95C4 /* MovieDetailStoryboard.storyboard in Resources */,
 				7E953E1C21C6D717007BC27A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,11 +265,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CodeChallenge/Pods-CodeChallenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,11 +287,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E953E3621C6D7E1007BC27A /* ServiceRequest.swift in Sources */,
-				7E953E1921C6D717007BC27A /* ViewController.swift in Sources */,
+				7E953E1921C6D717007BC27A /* UpcomingMoviesViewController.swift in Sources */,
+				7E4002CF21C869FA0075E9DB /* UpcomingMoviesTableViewCell.swift in Sources */,
+				7E953E3A21C6DAA2007BC27A /* Movie.swift in Sources */,
+				7E7D4A6A21C8913B004D95C4 /* MovieDetailViewController.swift in Sources */,
+				7E4002D121C8715B0075E9DB /* Genre.swift in Sources */,
 				7E953E3421C6D7D0007BC27A /* Request.swift in Sources */,
 				7E953E1721C6D717007BC27A /* AppDelegate.swift in Sources */,
 				7E953E3321C6D7D0007BC27A /* Request+HttpRequest.swift in Sources */,
 				7E953E3221C6D7D0007BC27A /* Request.MovieAPI.swift in Sources */,
+				7E953E3821C6DA18007BC27A /* MovieService.swift in Sources */,
 				7E953E3121C6D7D0007BC27A /* HttpRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +447,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3K85CCEUB;
 				INFOPLIST_FILE = CodeChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,6 +467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3K85CCEUB;
 				INFOPLIST_FILE = CodeChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

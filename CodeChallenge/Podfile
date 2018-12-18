@@ -9,6 +9,8 @@ target 'CodeChallenge' do
 
     # Pod for HTTPS request
     pod 'Alamofire'
+    pod 'Kingfisher'
+
 
     # Pod for JSON parsing
     pod 'SwiftyJSON'

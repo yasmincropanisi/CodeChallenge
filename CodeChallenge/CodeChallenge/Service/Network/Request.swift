@@ -13,6 +13,8 @@ enum Request {
     case movieAPI(MovieAPI)
     
     enum MovieAPI {
-        case upcomingMovies()
+        case upcomingMovies(page: Int)
+        case genres
+
     }
 }

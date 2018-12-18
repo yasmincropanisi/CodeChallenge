@@ -19,8 +19,8 @@ extension Request.MovieAPI: HttpRequest {
     var url: String {
 
         switch self {
-        case .upcomingMovies:
-            return "https://api.themoviedb.org/3/movie/"
+        case .upcomingMovies, .genres:
+            return "https://api.themoviedb.org/3/"
         }
     }
     
@@ -28,35 +28,40 @@ extension Request.MovieAPI: HttpRequest {
         switch self {
         case .upcomingMovies:
             return "movie/upcoming"
+        case .genres:
+            return "genre/movie/list"
         }
     }
     
     var body: [String : Any] {
         let body = [String : Any]()
         switch self {
-        case .upcomingMovies(let json):
-            return body
+        case .upcomingMovies(let page):
+            return ["api_key": ServiceRequest.apiKey, "page": page]
+        case .genres:
+            return ["api_key": ServiceRequest.apiKey]
         }
     }
     
     var headers: [String : String] {
         switch self {
-        case .upcomingMovies:
-            let header = [String: String]()
-            return headers
+        case .upcomingMovies, .genres:
+            return ["Content-Type": "application/json"]
         }
     }
     
     var parameters: Parameters {
         switch self {
-        case .upcomingMovies:
+        case .upcomingMovies(let page):
+            return ["api_key": ServiceRequest.apiKey, "page": page]
+        case .genres:
             return ["api_key": ServiceRequest.apiKey]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .upcomingMovies:
+        case .upcomingMovies, .genres:
             return .get
         }
     }

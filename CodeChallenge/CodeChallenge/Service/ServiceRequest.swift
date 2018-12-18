@@ -13,11 +13,11 @@ import SwiftyJSON
 
 class ServiceRequest {
     
-    static let apiKey = "1f54bd990f1cdfb230adb312546d765d."
+    static let apiKey = "4b5a25b48b6326f0ba4056890e569325"
 
     func perform(request: Request, _ completion: @escaping (_ response: String?, _ error: Error?) -> Void) {
-        let parameters = request.body.isEmpty ? nil : request.body
-        Alamofire.request("\(request.url)\(request.path)", method: request.method, parameters: parameters, encoding: JSONEncoding.default, headers: request.headers)
+        let parameters = request.body
+        Alamofire.request("\(request.url)\(request.path)", method: request.method, parameters: parameters, encoding: URLEncoding.default, headers: request.headers)
             .responseJSON { response in
                 guard response.result.isSuccess, let value = response.result.value else {
                     completion(nil, response.result.error)
@@ -41,5 +41,4 @@ class ServiceRequest {
         }
         return nil
     }
-    
 }
