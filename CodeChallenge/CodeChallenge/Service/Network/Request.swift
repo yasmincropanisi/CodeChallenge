@@ -15,6 +15,7 @@ enum Request {
     enum MovieAPI {
         case upcomingMovies(page: Int)
         case genres
+        case queryMovie(query: String)
 
     }
 }

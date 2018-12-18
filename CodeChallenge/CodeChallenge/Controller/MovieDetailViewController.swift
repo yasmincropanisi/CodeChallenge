@@ -7,24 +7,43 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var releaseDate: UILabel!
+    var movie: Movie?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureMovieDetails()
     }
     
+    // MARK: - View configuration
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configureMovieDetails() {
+        guard let movie = movie else { return }
+        self.navigationItem.title = movie.title
+        nameLabel.text = movie.title
+        overviewLabel.text = movie.overview
+        releaseDate.text = movie.releaseDate
+         let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
+        genreLabel.text = genres
+        setupImage(movie: movie)
     }
-    */
-
+    
+    
+    func setupImage(movie: Movie) {
+        guard let posterURL = movie.posterURL, let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterURL)") else { return }
+        let resource = ImageResource(downloadURL: url, cacheKey: movie.title )
+        let placeholder = UIImage(named: "placeholder")
+        movieImageView.kf.setImage(with: resource, placeholder: placeholder, options: [.transition(.fade(0.3))])
+        
+    
+    }
+    
 }

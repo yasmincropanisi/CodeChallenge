@@ -17,9 +17,8 @@ extension Request.MovieAPI: HttpRequest {
     }
     
     var url: String {
-
         switch self {
-        case .upcomingMovies, .genres:
+        case .upcomingMovies, .genres, .queryMovie:
             return "https://api.themoviedb.org/3/"
         }
     }
@@ -30,6 +29,8 @@ extension Request.MovieAPI: HttpRequest {
             return "movie/upcoming"
         case .genres:
             return "genre/movie/list"
+        case .queryMovie:
+            return "search/movie"
         }
     }
     
@@ -40,12 +41,15 @@ extension Request.MovieAPI: HttpRequest {
             return ["api_key": ServiceRequest.apiKey, "page": page]
         case .genres:
             return ["api_key": ServiceRequest.apiKey]
+        case .queryMovie(let query):
+            return ["api_key": ServiceRequest.apiKey, "query": query]
+
         }
     }
     
     var headers: [String : String] {
         switch self {
-        case .upcomingMovies, .genres:
+        case .upcomingMovies, .genres, .queryMovie:
             return ["Content-Type": "application/json"]
         }
     }
@@ -56,12 +60,14 @@ extension Request.MovieAPI: HttpRequest {
             return ["api_key": ServiceRequest.apiKey, "page": page]
         case .genres:
             return ["api_key": ServiceRequest.apiKey]
+        case .queryMovie(let query):
+            return ["api_key": ServiceRequest.apiKey, "query": query]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .upcomingMovies, .genres:
+        case .upcomingMovies, .genres, .queryMovie:
             return .get
         }
     }

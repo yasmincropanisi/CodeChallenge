@@ -12,6 +12,7 @@ class MovieService {
     
     private var serviceRequest = ServiceRequest()
     var upcomingMovies: [Movie]?
+    var filteredUpcomingMovies: [Movie]?
     static var genres: [Genre]?
     var totalPages: Int = 0
     var page: Int = 0
@@ -34,6 +35,22 @@ class MovieService {
             self?.setupTotalPages(total: movies?.total_pages)
                 self?.updateMovies(movies: movies?.results, nextPage: nextPage)
             
+            completion(movies?.results, nil)
+        }
+    }
+    
+    
+    func queryMovies(query: String, completion: @escaping (_ movies: [Movie]?, _ error: Error?) -> Void) {
+        
+        serviceRequest.perform(request: .movieAPI(.queryMovie(query: query))) { [weak self](json, error) in
+            guard error == nil else { completion(nil, error)
+                return
+            }
+            guard let json = json, let movies = try? self?.transformToObject(from: json, type: MovieResults.self) else { completion(nil, nil)
+                return
+            }
+            
+            self?.filteredUpcomingMovies = movies?.results
             completion(movies?.results, nil)
         }
     }
@@ -65,7 +82,10 @@ class MovieService {
         }
     }
     
-    func genreDescriptionsFor(ids: [Int]) -> String {
+    
+    
+    
+   static func genreDescriptionsFor(ids: [Int]) -> String {
         var descriptions = ""
         guard let descriptionsForIds = MovieService.genres?.filter({ (genre) -> Bool in
             return ids.contains(where: { (id) -> Bool in

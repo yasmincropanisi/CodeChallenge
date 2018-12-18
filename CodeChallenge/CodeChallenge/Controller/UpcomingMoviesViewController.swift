@@ -11,15 +11,23 @@ import UIKit
 class UpcomingMoviesViewController: UIViewController {
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var movieService: MovieService = MovieService()
+    var selectedMovie: Movie?
+    var shouldShowSearchResults: Bool = false {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
+        activityIndicator.startAnimating()
         movieService.getGenres { [weak self] (genres, error) in
+            self?.activityIndicator.stopAnimating()
             guard let genres = genres else { return }
             MovieService.genres = genres
             self?.fetchMovies(nextPage: false)
@@ -27,9 +35,26 @@ class UpcomingMoviesViewController: UIViewController {
     }
     
     func fetchMovies(nextPage: Bool) {
+        activityIndicator.startAnimating()
         movieService.fetchUpcomingMovies(nextPage: nextPage) { [weak self] (movies, error) in
+            self?.activityIndicator.stopAnimating()
             guard let movies = movies else { return }
             DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    func fetchMoviesWith(query: String) {
+        activityIndicator.startAnimating()
+        movieService.queryMovies(query: query) { [weak self] (movies, error) in
+            self?.activityIndicator.stopAnimating()
+            guard let movies = movies else { return }
+            if movies.count == 0 {
+                self?.shouldShowSearchResults = true
+            }
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
                 self?.tableView.reloadData()
             }
         }
@@ -41,28 +66,78 @@ class UpcomingMoviesViewController: UIViewController {
         tableView.estimatedRowHeight = 100
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? MovieDetailViewController {
+            destination.movie = selectedMovie
+        }
+    }
+    
+    func moviesToShow() -> [Movie]? {
+        if shouldShowSearchResults {
+            return movieService.filteredUpcomingMovies
+        }
+        else {
+            return movieService.upcomingMovies
+        }
+    }
 
 }
 
 extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieService.upcomingMovies?.count ?? 0
+        return moviesToShow()?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let movies = movieService.upcomingMovies, let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies") as? UpcomingMoviesTableViewCell else { return UITableViewCell() }
+        guard let movies = moviesToShow(), let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies") as? UpcomingMoviesTableViewCell else { return UITableViewCell() }
             let movie = movies[indexPath.row]
-            let genres = movieService.genreDescriptionsFor(ids: movie.genres)
+            let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
             cell.configureCellFor(movie: movie, genres: genres)
             return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let movies = movieService.upcomingMovies else { return }
-        if indexPath.row >= movies.count - 3 {
+        guard let movies = moviesToShow() else { return }
+        if indexPath.row >= movies.count - 3 && !shouldShowSearchResults {
             fetchMovies(nextPage: true)
         }
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let movies = moviesToShow() else { return }
+        selectedMovie = movies[indexPath.row]
+        performSegue(withIdentifier: "movieDetail", sender: self)
+        
+    }
+  
 }
+
+extension UpcomingMoviesViewController: UISearchBarDelegate {
+   
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        movieService.filteredUpcomingMovies?.removeAll()
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        shouldShowSearchResults = false
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.queryMovies(_:)), object: searchBar)
+        
+        perform(#selector(self.queryMovies(_:)), with: searchBar, afterDelay: 0.86)
+    }
+    
+    @objc func queryMovies(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" else {
+            movieService.filteredUpcomingMovies?.removeAll()
+            shouldShowSearchResults = false
+            return
+        }
+        activityIndicator.startAnimating()
+        shouldShowSearchResults = true
+        self.fetchMoviesWith(query: query)
+    }
+}
+
+

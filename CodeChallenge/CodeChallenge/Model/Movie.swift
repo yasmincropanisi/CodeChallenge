@@ -24,6 +24,7 @@ struct Movie: Decodable {
     var releaseDate: String
     var genres: [Int]
     var voteAverage: Double
+    var overview: String
     
     private enum CodingKeys: String, CodingKey {
         case id,
@@ -31,7 +32,8 @@ struct Movie: Decodable {
             posterURL = "poster_path",
             genres = "genre_ids",
             releaseDate = "release_date",
-            voteAverage = "vote_average"
+            voteAverage = "vote_average",
+            overview
     }
     
 }
