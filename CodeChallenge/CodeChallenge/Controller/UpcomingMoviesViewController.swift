@@ -140,6 +140,15 @@ extension UpcomingMoviesViewController: UISearchBarDelegate {
         perform(#selector(self.queryMovies(_:)), with: searchBar, afterDelay: 0.86)
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+
+    }
+    
     @objc func queryMovies(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" else {
             movieService.filteredUpcomingMovies?.removeAll()
