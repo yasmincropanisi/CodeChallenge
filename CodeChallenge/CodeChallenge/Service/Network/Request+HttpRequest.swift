@@ -30,14 +30,14 @@ extension Request: HttpRequest {
         }
     }
     
-    var headers: [String : String] {
+    var headers: [String: String] {
         switch self {
         case .movieAPI(let request):
             return request.headers
         }
     }
     
-    var body: [String : Any] {
+    var body: [String: Any] {
         switch self {
         case .movieAPI(let request):
             return request.body
@@ -58,4 +58,3 @@ extension Request: HttpRequest {
         }
     }
 }
-

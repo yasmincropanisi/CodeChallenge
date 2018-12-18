@@ -12,7 +12,7 @@ import Alamofire
 protocol HttpRequest {
     
     var url: String { get }
-    var path:String { get }
+    var path: String { get }
     var body: [String: Any] {get}
     var headers: [String: String] {get}
     var parameters: Parameters { get }

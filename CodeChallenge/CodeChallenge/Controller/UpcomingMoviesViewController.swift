@@ -10,7 +10,6 @@ import UIKit
 
 class UpcomingMoviesViewController: UIViewController {
     
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -38,7 +37,7 @@ class UpcomingMoviesViewController: UIViewController {
         activityIndicator.startAnimating()
         movieService.fetchUpcomingMovies(nextPage: nextPage) { [weak self] (movies, error) in
             self?.activityIndicator.stopAnimating()
-            guard let movies = movies else { return }
+            guard movies != nil else { return }
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -65,7 +64,6 @@ class UpcomingMoviesViewController: UIViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MovieDetailViewController {
             destination.movie = selectedMovie
@@ -75,8 +73,7 @@ class UpcomingMoviesViewController: UIViewController {
     func moviesToShow() -> [Movie]? {
         if shouldShowSearchResults {
             return movieService.filteredUpcomingMovies
-        }
-        else {
+        } else {
             return movieService.upcomingMovies
         }
     }
@@ -89,10 +86,15 @@ extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let movies = moviesToShow(), let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies") as? UpcomingMoviesTableViewCell else { return UITableViewCell() }
+        guard let movies = moviesToShow(),
+            let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies")
+                as? UpcomingMoviesTableViewCell
+            else { return UITableViewCell() }
         let movie = movies[indexPath.row]
         let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
-        cell.configureCellFor(movieName: movie.title, movieReleaseDate: movie.releaseDate, moviePosterURL: movie.releaseDate, genres: genres)
+        cell.configureCellFor(movieName: movie.title,
+                              movieReleaseDate: movie.releaseDate,
+                              moviePosterURL: movie.releaseDate, genres: genres)
         return cell
     }
     
@@ -122,7 +124,8 @@ extension UpcomingMoviesViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.queryMovies(_:)), object: searchBar)
+        NSObject.cancelPreviousPerformRequests(withTarget: self,
+                                               selector: #selector(self.queryMovies(_:)), object: searchBar)
         
         perform(#selector(self.queryMovies(_:)), with: searchBar, afterDelay: 0.86)
     }
@@ -138,5 +141,3 @@ extension UpcomingMoviesViewController: UISearchBarDelegate {
         self.fetchMoviesWith(query: query)
     }
 }
-
-

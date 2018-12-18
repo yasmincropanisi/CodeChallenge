@@ -34,8 +34,7 @@ extension Request.MovieAPI: HttpRequest {
         }
     }
     
-    var body: [String : Any] {
-        let body = [String : Any]()
+    var body: [String: Any] {
         switch self {
         case .upcomingMovies(let page):
             return ["api_key": ServiceRequest.apiKey, "page": page]
@@ -47,7 +46,7 @@ extension Request.MovieAPI: HttpRequest {
         }
     }
     
-    var headers: [String : String] {
+    var headers: [String: String] {
         switch self {
         case .upcomingMovies, .genres, .queryMovie:
             return ["Content-Type": "application/json"]

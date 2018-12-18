@@ -11,16 +11,9 @@ import Kingfisher
 
 class UpcomingMoviesTableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var movieImageView: UIImageView!
-    
-    
     @IBOutlet weak var nameLabel: UILabel!
-    
-    
     @IBOutlet weak var genreLabel: UILabel!
-    
-    
     @IBOutlet weak var releaseDateLabel: UILabel!
     
     override func awakeFromNib() {
@@ -50,4 +43,3 @@ class UpcomingMoviesTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
     }
 }
-

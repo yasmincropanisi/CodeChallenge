@@ -8,13 +8,15 @@
 
 import Foundation
 
-struct MovieResults : Decodable {
-    let total_pages: Int
-    let total_results: Int
+struct MovieResults: Decodable {
+    let totalPages: Int
+    let totalResults: Int
     let page: Int
     let results: [Movie]
+     private enum CodingKeys: String, CodingKey {
+        case totalPages = "total_pages", totalResults = "total_results", page, results
+    }
 }
-
 
 struct Movie: Decodable {
     

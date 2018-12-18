@@ -18,7 +18,6 @@ class MovieService {
     var totalPages: Int = 0
     var page: Int = 0
     
-    
     func fetchUpcomingMovies(nextPage: Bool, completion: @escaping (_ movies: [Movie]?, _ error: Error?) -> Void) {
         
         guard page <= totalPages else {
@@ -34,13 +33,12 @@ class MovieService {
                 completion(nil, nil)
                 return
             }
-            self?.setupTotalPages(total: movies?.total_pages)
+            self?.setupTotalPages(total: movies?.totalPages)
             self?.updateMovies(movies: movies?.results, nextPage: nextPage)
             
             completion(movies?.results, nil)
         }
     }
-    
     
     func queryMovies(query: String, completion: @escaping (_ movies: [Movie]?, _ error: Error?) -> Void) {
         
@@ -52,7 +50,6 @@ class MovieService {
                 completion(nil, nil)
                 return
             }
-            
             self?.filteredUpcomingMovies = movies?.results
             completion(movies?.results, nil)
         }
@@ -77,10 +74,11 @@ class MovieService {
             guard error == nil else { completion(nil, error)
                 return
             }
-            guard let json = json, let genres = try? self?.transformToObject(from: json, type: Genres.self) else { completion(nil, nil)
-                return
-            }
-            
+            guard let json = json, let genres =
+                try? self?.transformToObject(from: json, type: Genres.self)
+                else { completion(nil, nil)
+                        return
+                }
             completion(genres?.genres, nil)
         }
     }
@@ -93,7 +91,7 @@ class MovieService {
             return ids.contains(where: { (id) -> Bool in
                 return id == genre.id
             })
-        }) else  { return descriptions }
+        }) else { return descriptions }
         
         descriptions = descriptionsForIds.map({ (genre) -> String in
             return genre.name
@@ -101,15 +99,8 @@ class MovieService {
         
         return descriptions
     }
-    
-    func transformToObject<T : Decodable>(from jsonString:String, type: T.Type) throws -> T {
+    func transformToObject<T: Decodable>(from jsonString: String, type: T.Type) throws -> T {
         let jsonData = Data(jsonString.utf8)
         return try JSONDecoder().decode(T.self, from: jsonData)
     }
-    
-    
-    
-    
-    
-    
 }
