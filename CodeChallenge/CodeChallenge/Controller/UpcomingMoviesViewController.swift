@@ -25,9 +25,10 @@ class UpcomingMoviesViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         activityIndicator.startAnimating()
-        movieService.getGenres { [weak self] (genres, error) in
+        movieService.getGenres { [weak self] (genres, _ ) in
             self?.activityIndicator.stopAnimating()
-            guard let genres = genres else { return }
+            guard let genres = genres else {                 self?.displayErrorAlert()
+                return }
             MovieService.genres = genres
             self?.fetchMovies(nextPage: false)
         }
@@ -35,9 +36,12 @@ class UpcomingMoviesViewController: UIViewController {
     
     func fetchMovies(nextPage: Bool) {
         activityIndicator.startAnimating()
-        movieService.fetchUpcomingMovies(nextPage: nextPage) { [weak self] (movies, error) in
+        movieService.fetchUpcomingMovies(nextPage: nextPage) { [weak self] (movies, _) in
             self?.activityIndicator.stopAnimating()
-            guard movies != nil else { return }
+            guard movies != nil else {
+                self?.displayErrorAlert()
+                return
+            }
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -46,7 +50,7 @@ class UpcomingMoviesViewController: UIViewController {
     
     func fetchMoviesWith(query: String) {
         activityIndicator.startAnimating()
-        movieService.queryMovies(query: query) { [weak self] (movies, error) in
+        movieService.queryMovies(query: query) { [weak self] (movies, _ ) in
             self?.activityIndicator.stopAnimating()
             guard let movies = movies else { return }
             if movies.count == 0 {
@@ -78,6 +82,12 @@ class UpcomingMoviesViewController: UIViewController {
         }
     }
     
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Something went wrong",
+                message: "Please, try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
 }
 
 extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSource {
