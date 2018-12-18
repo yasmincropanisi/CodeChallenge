@@ -20,7 +20,6 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search here" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SDh-Mb-g0J">
                                 <rect key="frame" x="0.0" y="116" width="375" height="56"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="6tV-FI-RK1"/>
