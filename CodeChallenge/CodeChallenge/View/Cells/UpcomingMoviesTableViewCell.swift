@@ -42,7 +42,7 @@ class UpcomingMoviesTableViewCell: UITableViewCell {
     }
     
     func updateImage(movie: Movie) {
-        guard let posterURL = movie.posterURL, let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterURL)") else { return }
+        guard let posterURL = movie.posterURL, let url = URL(string: "\(MovieService.imageURL)\(posterURL)") else { return }
         let resource = ImageResource(downloadURL: url, cacheKey: movie.title )
         let placeholder = UIImage(named: "placeholder")
         movieImageView.kf.setImage(with: resource, placeholder: placeholder, options: [.transition(.fade(0.3))])

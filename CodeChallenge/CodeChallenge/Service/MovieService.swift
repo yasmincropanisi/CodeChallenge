@@ -14,6 +14,7 @@ class MovieService {
     var upcomingMovies: [Movie]?
     var filteredUpcomingMovies: [Movie]?
     static var genres: [Genre]?
+    static var imageURL: String = "https://image.tmdb.org/t/p/w500"
     var totalPages: Int = 0
     var page: Int = 0
     
