@@ -24,16 +24,17 @@ class MovieService {
             completion(nil, nil)
             return
         }
-            page = nextPage ? page + 1 : 1
-            serviceRequest.perform(request: .movieAPI(.upcomingMovies(page: page))) { [weak self](json, error) in
+        page = nextPage ? page + 1 : 1
+        serviceRequest.perform(request: .movieAPI(.upcomingMovies(page: page))) { [weak self](json, error) in
             guard error == nil else { completion(nil, error)
                 return
             }
-            guard let json = json, let movies = try? self?.transformToObject(from: json, type: MovieResults.self) else { completion(nil, nil)
+            guard let json = json, let movies = try? self?.transformToObject(from: json, type: MovieResults.self) else {
+                completion(nil, nil)
                 return
             }
             self?.setupTotalPages(total: movies?.total_pages)
-                self?.updateMovies(movies: movies?.results, nextPage: nextPage)
+            self?.updateMovies(movies: movies?.results, nextPage: nextPage)
             
             completion(movies?.results, nil)
         }
@@ -46,7 +47,8 @@ class MovieService {
             guard error == nil else { completion(nil, error)
                 return
             }
-            guard let json = json, let movies = try? self?.transformToObject(from: json, type: MovieResults.self) else { completion(nil, nil)
+            guard let json = json, let movies = try? self?.transformToObject(from: json, type: MovieResults.self) else {
+                completion(nil, nil)
                 return
             }
             
@@ -63,7 +65,7 @@ class MovieService {
     func updateMovies(movies: [Movie]?, nextPage: Bool) {
         guard let movies = movies else { return }
         if nextPage {
-             self.upcomingMovies?.append(contentsOf: movies)
+            self.upcomingMovies?.append(contentsOf: movies)
         } else {
             self.upcomingMovies = movies
         }
@@ -82,19 +84,20 @@ class MovieService {
         }
     }
     
-    
-    
-    
-   static func genreDescriptionsFor(ids: [Int]) -> String {
+    static func genreDescriptionsFor(ids: [Int]) -> String {
+        
         var descriptions = ""
+        
         guard let descriptionsForIds = MovieService.genres?.filter({ (genre) -> Bool in
             return ids.contains(where: { (id) -> Bool in
                 return id == genre.id
             })
         }) else  { return descriptions }
+        
         descriptions = descriptionsForIds.map({ (genre) -> String in
             return genre.name
         }).joined(separator: ", ")
+        
         return descriptions
     }
     

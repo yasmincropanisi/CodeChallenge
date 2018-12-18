@@ -28,12 +28,12 @@ struct Movie: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case id,
-            title,
-            posterURL = "poster_path",
-            genres = "genre_ids",
-            releaseDate = "release_date",
-            voteAverage = "vote_average",
-            overview
+        title,
+        posterURL = "poster_path",
+        genres = "genre_ids",
+        releaseDate = "release_date",
+        voteAverage = "vote_average",
+        overview
     }
     
 }

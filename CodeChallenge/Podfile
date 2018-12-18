@@ -13,9 +13,6 @@ target 'CodeChallenge' do
     # Pod for cache and retrieve images
     pod 'Kingfisher'
 
-    #Pod to help write better code
-    pod 'SwiftLint'
-
     # Pod for JSON parsing
     pod 'SwiftyJSON'
 

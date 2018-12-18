@@ -65,7 +65,7 @@ class UpcomingMoviesViewController: UIViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MovieDetailViewController {
             destination.movie = selectedMovie
@@ -80,7 +80,7 @@ class UpcomingMoviesViewController: UIViewController {
             return movieService.upcomingMovies
         }
     }
-
+    
 }
 
 extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -90,10 +90,10 @@ extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let movies = moviesToShow(), let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMovies") as? UpcomingMoviesTableViewCell else { return UITableViewCell() }
-            let movie = movies[indexPath.row]
-            let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
-            cell.configureCellFor(movie: movie, genres: genres)
-            return cell
+        let movie = movies[indexPath.row]
+        let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
+        cell.configureCellFor(movie: movie, genres: genres)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -106,14 +106,13 @@ extension UpcomingMoviesViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movies = moviesToShow() else { return }
         selectedMovie = movies[indexPath.row]
-        performSegue(withIdentifier: "movieDetail", sender: self)
-        
+        performSegue(withIdentifier: "movieDetail", sender: self)        
     }
-  
+    
 }
 
 extension UpcomingMoviesViewController: UISearchBarDelegate {
-   
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         movieService.filteredUpcomingMovies?.removeAll()
         searchBar.text = ""

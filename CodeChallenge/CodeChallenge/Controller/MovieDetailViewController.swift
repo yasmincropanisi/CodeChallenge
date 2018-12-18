@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class MovieDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -24,14 +24,14 @@ class MovieDetailViewController: UIViewController {
     }
     
     // MARK: - View configuration
-
+    
     func configureMovieDetails() {
         guard let movie = movie else { return }
         self.navigationItem.title = movie.title
         nameLabel.text = movie.title
         overviewLabel.text = movie.overview
         releaseDate.text = movie.releaseDate
-         let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
+        let genres = MovieService.genreDescriptionsFor(ids: movie.genres)
         genreLabel.text = genres
         setupImage(movie: movie)
     }
@@ -43,7 +43,7 @@ class MovieDetailViewController: UIViewController {
         let placeholder = UIImage(named: "placeholder")
         movieImageView.kf.setImage(with: resource, placeholder: placeholder, options: [.transition(.fade(0.3))])
         
-    
+        
     }
     
 }
